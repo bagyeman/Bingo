@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Bingo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="bingo_letter">Bingo Says Letter</string>
+    <string name="bingo_start">Bingo Start</string>
+    <string name="bingo_stop">Bingo Stop</string>
 </resources>
