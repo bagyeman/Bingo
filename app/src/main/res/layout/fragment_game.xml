@@ -1,174 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".fragments.GameFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gameConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/bingo_says_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/bingo_letter"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/bingo_letter_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="B"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bingo_says_text" />
+        <TextView
+            android:id="@+id/bingo_says_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/bingo_letter"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/start_stop_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/circular_button"
-        android:text="@string/bingo_start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bingo_letter_text"
-        app:layout_constraintVertical_bias="0.05" />
+        <TextView
+            android:id="@+id/bingo_letter_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bingo_says_text" />
 
-    <TextView
-        android:id="@+id/bingo_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="122dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="30"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toEndOf="@+id/start_stop_button"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
+        <Button
+            android:id="@+id/start_stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_button"
+            android:text="@string/bingo_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bingo_letter_text"
+            app:layout_constraintVertical_bias="0.05" />
 
-    <TextView
-        android:id="@+id/name_text"
-        style="@style/NameStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_wide"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="116dp"
-        android:gravity="center"
-        android:text="@string/name"
-        app:layout_constraintEnd_toStartOf="@+id/country_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_stop_button" />
+        <TextView
+            android:id="@+id/bingo_countTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginLeft="84dp"
+            android:layout_marginTop="122dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="30"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintStart_toEndOf="@+id/start_stop_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.042" />
 
-    <TextView
-        android:id="@+id/country_text"
-        style="@style/NameStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_wide"
-        android:layout_marginLeft="@dimen/margin_wide"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="@dimen/margin_wide"
-        android:layout_marginRight="@dimen/margin_wide"
-        android:layout_marginBottom="4dp"
-        android:gravity="center"
-        android:text="@string/country"
-        app:layout_constraintBottom_toBottomOf="@+id/name_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/name_text"
-        app:layout_constraintTop_toBottomOf="@+id/start_stop_button"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/name_text"
+            style="@style/NameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_wide"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="116dp"
+            android:gravity="center"
+            android:text="@string/name"
+            app:layout_constraintEnd_toStartOf="@+id/country_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_stop_button" />
 
-    <EditText
-        android:id="@+id/country_editText"
-        style="@style/NameStyle"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/name_editText"
-        app:layout_constraintEnd_toEndOf="@+id/country_text"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/country_text"
-        app:layout_constraintTop_toBottomOf="@+id/country_text" />
+        <TextView
+            android:id="@+id/country_text"
+            style="@style/NameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_wide"
+            android:layout_marginLeft="@dimen/margin_wide"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="@dimen/margin_wide"
+            android:layout_marginRight="@dimen/margin_wide"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="@string/country"
+            app:layout_constraintBottom_toBottomOf="@+id/name_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/name_text"
+            app:layout_constraintTop_toBottomOf="@+id/start_stop_button"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/name_editText"
-        style="@style/NameStyle"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/name_text"
-        app:layout_constraintTop_toBottomOf="@+id/name_text"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/country_editText"
+            style="@style/NameStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/name_editText"
+            app:layout_constraintEnd_toEndOf="@+id/country_text"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="@+id/country_text"
+            app:layout_constraintTop_toBottomOf="@+id/country_text" />
 
-    <TextView
-        android:id="@+id/animal_text"
-        style="@style/NameStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_wide"
-        android:layout_marginLeft="@dimen/margin_wide"
-        android:layout_marginBottom="184dp"
-        android:gravity="center"
-        android:text="@string/animal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/food_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/name_editText"
+            style="@style/NameStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/name_text"
+            app:layout_constraintTop_toBottomOf="@+id/name_text"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/food_text"
-        style="@style/NameStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:gravity="center"
-        android:text="@string/food"
-        app:layout_constraintBottom_toBottomOf="@+id/animal_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/animal_text" />
+        <TextView
+            android:id="@+id/animal_text"
+            style="@style/NameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_wide"
+            android:layout_marginLeft="@dimen/margin_wide"
+            android:layout_marginBottom="184dp"
+            android:gravity="center"
+            android:text="@string/animal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/food_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/animal_editText"
-        style="@style/NameStyle"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/animal_text"
-        app:layout_constraintStart_toStartOf="@+id/animal_text"
-        app:layout_constraintTop_toBottomOf="@+id/animal_text" />
+        <TextView
+            android:id="@+id/food_text"
+            style="@style/NameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center"
+            android:text="@string/food"
+            app:layout_constraintBottom_toBottomOf="@+id/animal_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/animal_text" />
 
-    <EditText
-        android:id="@+id/food_editText"
-        style="@style/NameStyle"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/food_text"
-        app:layout_constraintStart_toStartOf="@+id/food_text"
-        app:layout_constraintTop_toBottomOf="@+id/food_text" />
+        <EditText
+            android:id="@+id/animal_editText"
+            style="@style/NameStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/animal_text"
+            app:layout_constraintStart_toStartOf="@+id/animal_text"
+            app:layout_constraintTop_toBottomOf="@+id/animal_text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/food_editText"
+            style="@style/NameStyle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/food_text"
+            app:layout_constraintStart_toStartOf="@+id/food_text"
+            app:layout_constraintTop_toBottomOf="@+id/food_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
