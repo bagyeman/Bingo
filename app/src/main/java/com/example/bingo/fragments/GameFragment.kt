@@ -36,6 +36,7 @@ class GameFragment : Fragment() {
     var bingoCountDownTimerState: Boolean = true
     var score: Int = 0
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,6 +46,22 @@ class GameFragment : Fragment() {
 
         binding.startStopButton.setOnClickListener {
 
+            binding.nameEditText.isCursorVisible = true
+            binding.nameEditText.isFocusableInTouchMode = true
+            binding.nameEditText.isFocusable = true
+
+            binding.countryEditText.isCursorVisible = true
+            binding.countryEditText.isFocusableInTouchMode = true
+            binding.countryEditText.isFocusable = true
+
+            binding.animalEditText.isCursorVisible = true
+            binding.animalEditText.isFocusableInTouchMode = true
+            binding.animalEditText.isFocusable = true
+
+            binding.foodEditText.isCursorVisible = true
+            binding.foodEditText.isFocusableInTouchMode = true
+            binding.foodEditText.isFocusable = true
+
             if (bingoCountDownTimerState) {
                 bingoCountDownTimerState = false
                 binding.startStopButton.text = "Bingo Stop"
@@ -52,13 +69,48 @@ class GameFragment : Fragment() {
                 startTimerCounter()
             } else {
                 bingoCountDownTimer.cancel()
+
+                binding.nameEditText.isCursorVisible = false
+                binding.nameEditText.isFocusableInTouchMode = false
+                binding.nameEditText.isFocusable = false
+
+                binding.countryEditText.isCursorVisible = false
+                binding.countryEditText.isFocusableInTouchMode = false
+                binding.countryEditText.isFocusable = false
+
+                binding.animalEditText.isCursorVisible = false
+                binding.animalEditText.isFocusableInTouchMode = false
+                binding.animalEditText.isFocusable = false
+
+                binding.foodEditText.isCursorVisible = false
+                binding.foodEditText.isFocusableInTouchMode = false
+                binding.foodEditText.isFocusable = false
             }
 
         }
 
         binding.nameEditText.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                checkName()
+
+                validateName()
+            }
+        }
+
+        binding.countryEditText.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                validateCountry()
+            }
+        }
+
+        binding.animalEditText.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                validateAnimal()
+            }
+        }
+
+        binding.foodEditText.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                validateFood()
             }
         }
 
@@ -83,28 +135,99 @@ class GameFragment : Fragment() {
 
     }
 
-    private fun checkName() {
+    private fun validateName() {
 
-        var namesOfPeople = listOf<String>("Aba", "Bel", "Kojo", "Adwoa")
+        var namesOfPeople = listOf<String>("Aba", "Bel", "Kojo", "Adwoa", "Zain", "Norris", "Pam")
         var name = binding.nameEditText.text.toString()
-        var nameFirstLetter : String
+        var nameFirstLetter: String
         var bingoLetter = binding.bingoLetterText.text
 
 
         if (name != "") {
+            name = name.capitalize()
             nameFirstLetter = name.first().toString()
             if (nameFirstLetter == bingoLetter && namesOfPeople.contains(name)) {
-                //Toast.makeText(requireContext(), "correct", Toast.LENGTH_LONG).show()
-                Log.d("tag", "Correct")
+                score += 10
+                Toast.makeText(requireContext(), "You have: $score points", Toast.LENGTH_LONG).show()
+
             } else {
-               // Toast.makeText(requireContext(), "wrong", Toast.LENGTH_LONG).show()
-                Log.d("tag", "Wrong")
+
+                Toast.makeText(requireContext(), "wrong", Toast.LENGTH_LONG).show()
 
             }
         }
 
 
     }
+
+    private fun validateCountry() {
+
+        var namesOfCountries = listOf<String>("Ghana","Togo","Berlin","Angola","Spain",
+            "Portugal","Kenya","Norway")
+        var country = binding.countryEditText.text.toString()
+        var countryFirstLetter : String
+        var bingoLetter = binding.bingoLetterText.text
+
+        if (country!= "") {
+            country = country.trim()
+            country = country.capitalize()
+            countryFirstLetter = country.first().toString()
+            if (countryFirstLetter == bingoLetter && namesOfCountries.contains(country)){
+                score+=10
+                Toast.makeText(requireContext(), "You have : $score points", Toast.LENGTH_LONG).show()
+
+            } else {
+                Toast.makeText(requireContext(), "You have: $score points", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
+    private fun validateAnimal() {
+
+        var namesOfAnimals = listOf<String>("Antelope","Dog","Cat","Sheep")
+        var animal = binding.animalEditText.text.toString()
+        var animalFirstLetter : String
+        var bingoLetter = binding.bingoLetterText.text
+
+        if (animal!= "") {
+            animal = animal.trim()
+            animal = animal.capitalize()
+            animalFirstLetter = animal.first().toString()
+            if (animalFirstLetter == bingoLetter && namesOfAnimals.contains(animal)){
+                score+=10
+                Toast.makeText(requireContext(), "You have : $score points", Toast.LENGTH_LONG).show()
+
+            } else {
+                Toast.makeText(requireContext(), "You have: $score points", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
+    private fun validateFood() {
+
+        var namesOfFoods = listOf<String>("Gari","Bread","Rice","Apple","Cheese")
+        var food = binding.foodEditText.text.toString()
+        var foodFirstLetter : String
+        var bingoLetter = binding.bingoLetterText.text
+
+        if (food!= "") {
+            food = food.trim()
+            food = food.capitalize()
+            foodFirstLetter = food.first().toString()
+            if (foodFirstLetter == bingoLetter && namesOfFoods.contains(food)){
+                score+=10
+                Toast.makeText(requireContext(), "You have : $score points", Toast.LENGTH_LONG).show()
+
+            } else {
+                Toast.makeText(requireContext(), "You have: $score points", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
+    
 
 
     override fun onCreateView(
