@@ -14,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.bingo.R
 import com.example.bingo.databinding.FragmentGameBinding
 
@@ -31,36 +33,25 @@ private const val ARG_PARAM2 = "param2"
 
 class GameFragment : Fragment() {
 
+    private lateinit var viewModel: GameViewModel
     private lateinit var binding: FragmentGameBinding
     private lateinit var bingoCountDownTimer: CountDownTimer
     var bingoCountDownTimerState: Boolean = true
     var score: Int = 0
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val alphabets = ('A'..'Z')
+//        val alphabets = ('A'..'Z')
 
-        binding.bingoLetterText.text = alphabets.random().toString()
+//        binding.bingoLetterText.text = alphabets.random().toString()
+        binding.bingoLetterText.text = viewModel.letter
 
         binding.startStopButton.setOnClickListener {
 
-            binding.nameEditText.isCursorVisible = true
-            binding.nameEditText.isFocusableInTouchMode = true
-            binding.nameEditText.isFocusable = true
-
-            binding.countryEditText.isCursorVisible = true
-            binding.countryEditText.isFocusableInTouchMode = true
-            binding.countryEditText.isFocusable = true
-
-            binding.animalEditText.isCursorVisible = true
-            binding.animalEditText.isFocusableInTouchMode = true
-            binding.animalEditText.isFocusable = true
-
-            binding.foodEditText.isCursorVisible = true
-            binding.foodEditText.isFocusableInTouchMode = true
-            binding.foodEditText.isFocusable = true
+            enableEditText()
 
             if (bingoCountDownTimerState) {
                 bingoCountDownTimerState = false
@@ -70,21 +61,10 @@ class GameFragment : Fragment() {
             } else {
                 bingoCountDownTimer.cancel()
 
-                binding.nameEditText.isCursorVisible = false
-                binding.nameEditText.isFocusableInTouchMode = false
-                binding.nameEditText.isFocusable = false
+                disableEditText()
 
-                binding.countryEditText.isCursorVisible = false
-                binding.countryEditText.isFocusableInTouchMode = false
-                binding.countryEditText.isFocusable = false
-
-                binding.animalEditText.isCursorVisible = false
-                binding.animalEditText.isFocusableInTouchMode = false
-                binding.animalEditText.isFocusable = false
-
-                binding.foodEditText.isCursorVisible = false
-                binding.foodEditText.isFocusableInTouchMode = false
-                binding.foodEditText.isFocusable = false
+                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
+                view.findNavController().navigate(action)
             }
 
         }
@@ -122,7 +102,13 @@ class GameFragment : Fragment() {
         var counter = 30
         binding.bingoCountTime
         bingoCountDownTimer = object : CountDownTimer(31000, 1000) {
+
             override fun onFinish() {
+                disableEditText()
+                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
+                view?.findNavController()?.navigate(action)
+
+
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -134,6 +120,10 @@ class GameFragment : Fragment() {
         }.start()
 
     }
+
+//    private fun displayBingoLetter(){
+//        binding.bingoLetterText.text = letter
+//    }
 
     private fun validateName() {
 
@@ -227,6 +217,42 @@ class GameFragment : Fragment() {
 
     }
 
+    private fun enableEditText() {
+        binding.nameEditText.isCursorVisible = true
+        binding.nameEditText.isFocusableInTouchMode = true
+        binding.nameEditText.isFocusable = true
+
+        binding.countryEditText.isCursorVisible = true
+        binding.countryEditText.isFocusableInTouchMode = true
+        binding.countryEditText.isFocusable = true
+
+        binding.animalEditText.isCursorVisible = true
+        binding.animalEditText.isFocusableInTouchMode = true
+        binding.animalEditText.isFocusable = true
+
+        binding.foodEditText.isCursorVisible = true
+        binding.foodEditText.isFocusableInTouchMode = true
+        binding.foodEditText.isFocusable = true
+    }
+
+    private fun disableEditText() {
+        binding.nameEditText.isCursorVisible = false
+        binding.nameEditText.isFocusableInTouchMode = false
+        binding.nameEditText.isFocusable = false
+
+        binding.countryEditText.isCursorVisible = false
+        binding.countryEditText.isFocusableInTouchMode = false
+        binding.countryEditText.isFocusable = false
+
+        binding.animalEditText.isCursorVisible = false
+        binding.animalEditText.isFocusableInTouchMode = false
+        binding.animalEditText.isFocusable = false
+
+        binding.foodEditText.isCursorVisible = false
+        binding.foodEditText.isFocusableInTouchMode = false
+        binding.foodEditText.isFocusable = false
+    }
+
     
 
 
@@ -239,8 +265,12 @@ class GameFragment : Fragment() {
             inflater,
             R.layout.fragment_game, container, false
         )
-        return binding.root
 
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
+
+
+        return binding.root
 
     }
 
