@@ -50,10 +50,10 @@ class ScoreFragment : Fragment() {
             R.layout.fragment_score, container, false
         )
 
-//        viewModelFactory = ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments().score))
-
         //receive score argument in a variable
         val finalScore = args.score
+
+        viewModelFactory = ScoreViewModelFactory(finalScore)
 
         //set value to score Textview
         binding.scoreText.text = finalScore.toString()
