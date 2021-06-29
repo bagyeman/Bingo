@@ -14,7 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.bingo.R
 import com.example.bingo.databinding.FragmentGameBinding
@@ -31,12 +34,14 @@ private const val ARG_PARAM2 = "param2"
  */
 
 
-class GameFragment : Fragment() {
+class GameFragment : Fragment(R.layout.fragment_game) {
 
-    private lateinit var viewModel: GameViewModel
-    private lateinit var binding: FragmentGameBinding
+//    private lateinit var viewModel: GameViewModel
+    private val viewModel by viewModels<GameViewModel>()
+    private val binding by dataBinding<FragmentGameBinding>()
+//    private lateinit var binding: FragmentGameBinding
     private lateinit var bingoCountDownTimer: CountDownTimer
-    var bingoCountDownTimerState: Boolean = true
+//    var bingoCountDownTimerState: Boolean = true
     var score: Int = 0
 
 
@@ -44,30 +49,36 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setObservers()
+        setListeners()
+
+
 //        val alphabets = ('A'..'Z')
 
 //        binding.bingoLetterText.text = alphabets.random().toString()
         binding.bingoLetterText.text = viewModel.letter
 
-        binding.startStopButton.setOnClickListener {
+//        binding.startStopButton.setOnClickListener {
+//
+//            enableEditText()
 
-            enableEditText()
+//            if (bingoCountDownTimerState) {
+//                bingoCountDownTimerState = false
+//                binding.startStopButton.text = "Bingo Stop"
+////                binding.startStopButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
+//                startTimerCounter()
+//            } else {
+//                bingoCountDownTimer.cancel()
+//
+//                disableEditText()
+//
+//                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
+//                view.findNavController().navigate(action)
+//            }
 
-            if (bingoCountDownTimerState) {
-                bingoCountDownTimerState = false
-                binding.startStopButton.text = "Bingo Stop"
-//                binding.startStopButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
-                startTimerCounter()
-            } else {
-                bingoCountDownTimer.cancel()
 
-                disableEditText()
 
-                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
-                view.findNavController().navigate(action)
-            }
-
-        }
+//        }
 
         binding.nameEditText.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
@@ -97,13 +108,24 @@ class GameFragment : Fragment() {
 
     }
 
+    private fun setObservers() {
+        viewModel.bingoText.observe(viewLifecycleOwner) {
+            binding.startStopButton.text = it
+        }
 
-    private fun startTimerCounter() {
-        var counter = 30
-        binding.bingoCountTime
-        bingoCountDownTimer = object : CountDownTimer(31000, 1000) {
+        viewModel.counter.observe(viewLifecycleOwner) {
+            binding.bingoCountTime.text = it.toString()
+        }
 
-            override fun onFinish() {
+//        viewModel.bingoButtonState.observe(viewLifecycleOwner) { isTrue ->
+//            if (!isTrue) {
+//                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
+//                view?.findNavController()?.navigate(action)
+//            }
+//        }
+
+        viewModel.done.observe(viewLifecycleOwner) { isTrue ->
+            if (isTrue) {
                 disableEditText()
                 val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
                 view?.findNavController()?.navigate(action)
@@ -111,15 +133,39 @@ class GameFragment : Fragment() {
 
             }
 
-            override fun onTick(millisUntilFinished: Long) {
-                binding.bingoCountTime.text = counter.toString()
-                counter -= 1
-
-            }
-
-        }.start()
-
+        }
     }
+
+    private fun setListeners() {
+        binding.startStopButton.setOnClickListener {
+            viewModel.changeBingoButtonState()
+            enableEditText()
+        }
+    }
+
+
+//    private fun startTimerCounter() {
+//        var counter = 30
+////        binding.bingoCountTime
+//        bingoCountDownTimer = object : CountDownTimer(31000, 1000) {
+//
+//            override fun onFinish() {
+//                disableEditText()
+//                val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
+//                view?.findNavController()?.navigate(action)
+//
+//
+//            }
+//
+//            override fun onTick(millisUntilFinished: Long) {
+//                binding.bingoCountTime.text = counter.toString()
+//                counter -= 1
+//
+//            }
+//
+//        }.start()
+//
+//    }
 
 //    private fun displayBingoLetter(){
 //        binding.bingoLetterText.text = letter
@@ -253,26 +299,29 @@ class GameFragment : Fragment() {
         binding.foodEditText.isFocusable = false
     }
 
-    
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate<FragmentGameBinding>(
-            inflater,
-            R.layout.fragment_game, container, false
-        )
-
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
 
 
-        return binding.root
-
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        // Inflate the layout for this fragment
+////        binding = DataBindingUtil.inflate<FragmentGameBinding>(
+////            inflater,
+////            R.layout.fragment_game, container, false
+////        )
+//
+////        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+//
+//        /** Setting up LiveData observation relationship **/
+//
+//
+//
+//
+//        return binding.root
+//
+//    }
 
 
 }
