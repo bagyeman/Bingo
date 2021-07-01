@@ -49,8 +49,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.gameViewModel = viewModel
+
         setObservers()
-        setListeners()
+//        setListeners()
 
 
 //        val alphabets = ('A'..'Z')
@@ -109,13 +111,14 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
 
     private fun setObservers() {
-        viewModel.bingoText.observe(viewLifecycleOwner) {
-            binding.startStopButton.text = it
-        }
 
-        viewModel.counter.observe(viewLifecycleOwner) {
-            binding.bingoCountTime.text = it.toString()
-        }
+//        viewModel.bingoText.observe(viewLifecycleOwner) {
+//            binding.startStopButton.text = it
+//        }
+
+//        viewModel.counter.observe(viewLifecycleOwner) {
+//            binding.bingoCountTime.text = it.toString()
+//        }
 
 //        viewModel.bingoButtonState.observe(viewLifecycleOwner) { isTrue ->
 //            if (!isTrue) {
@@ -129,19 +132,19 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 disableEditText()
                 val action = GameFragmentDirections.actionGameFragmentToScoreFragment(score)
                 view?.findNavController()?.navigate(action)
-
-
+            } else {
+                enableEditText()
             }
 
         }
     }
 
-    private fun setListeners() {
-        binding.startStopButton.setOnClickListener {
-            viewModel.changeBingoButtonState()
-            enableEditText()
-        }
-    }
+//    private fun setListeners() {
+//        binding.startStopButton.setOnClickListener {
+//            viewModel.changeBingoButtonState()
+//            enableEditText()
+//        }
+//    }
 
 
 //    private fun startTimerCounter() {
@@ -306,16 +309,9 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 //        inflater: LayoutInflater, container: ViewGroup?,
 //        savedInstanceState: Bundle?
 //    ): View? {
-//        // Inflate the layout for this fragment
-////        binding = DataBindingUtil.inflate<FragmentGameBinding>(
-////            inflater,
-////            R.layout.fragment_game, container, false
-////        )
-//
-////        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-//
-//        /** Setting up LiveData observation relationship **/
-//
+//        //set the viewmodel for databinding
+//        //This allows the bound layout access to all the data in the ViewModel
+//        binding.gameViewModel = viewModel
 //
 //
 //

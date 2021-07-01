@@ -14,14 +14,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private lateinit var bingoCountDownTimer: CountDownTimer
 
-    private val _bingoText = MutableLiveData<String>()
-    val bingoText : LiveData<String> = _bingoText
+    var bingoText = MutableLiveData("Bingo Start")
+//    val bingoText : LiveData<String> = _bingoText
 
     private val _bingoButtonState = MutableLiveData(true)
     val bingoButtonState : LiveData<Boolean> = _bingoButtonState
 
-    private val _counter = MutableLiveData(30)
-    val counter : LiveData<Int> = _counter
+    var counter = MutableLiveData(30)
+//    var counter : LiveData<Int> = _counter
 
     private val _done = MutableLiveData<Boolean>()
     val done : LiveData<Boolean> = _done
@@ -32,9 +32,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Change Bingo button text
-    private fun changeBingoButtonText(bingoText : String) {
-        _bingoText.value = bingoText
-    }
+//    private fun changeBingoButtonText(bingoText : String) {
+//        bingoText = bingoText
+//    }
 
 
     fun changeBingoButtonState() {
@@ -42,8 +42,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _bingoButtonState.value?.let { isTrue ->
             // change button state so UI reacts to the changes
             if (isTrue) {
+                _done.value = false
                 _bingoButtonState.value = false
-                changeBingoButtonText("Bingo Stop")
+                bingoText.value = "Bingo Stop"
                 startTimerCounter()
             } else {
 //                _bingoButtonState.value = true
@@ -58,7 +59,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun startTimerCounter() {
         bingoCountDownTimer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                _counter.value = (counter.value)?.minus(1)
+                counter.value = (counter.value)?.minus(1)
             }
 
             override fun onFinish() {

@@ -5,6 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.GameFragment">
 
+    <data>
+
+        <variable
+            name="gameViewModel"
+            type="com.example.bingo.fragments.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gameConstraint"
         android:layout_width="match_parent"
@@ -37,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circular_button"
-            android:text="@string/bingo_start"
+            android:text="@{gameViewModel.bingoText}"
+            android:onClick="@{() -> gameViewModel.changeBingoButtonState()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -54,7 +62,7 @@
             android:layout_marginTop="122dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="30"
+            android:text="@{String.valueOf(gameViewModel.counter)}"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
